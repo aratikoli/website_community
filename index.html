@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Communities</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <nav>
+        <a href="#">Home</a>
+        <ul>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+    </nav>
+    <div id="banner">
+        <h1>Communities</h1>
+    </div>
+    <main>
+        <h2 class="common-heading">COMMUNITIES WE MANAGE</h2>
+        <section id="community-section">
+            <!-- Communities will be loaded here -->
+        </section>
+        <h2 class="common-heading">OUR SERVICES</h2>
+        <div class="carousel" id="community-carousel">
+            <!-- Carousel items will be loaded here -->
+        </div>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            axios.get('fetch_communities.php')
+                .then(response => {
+                    const data = response.data.data;  // Access the data array
+                    const section = document.getElementById('community-section');
+                    const carousel = document.getElementById('community-carousel');
+                    if (response.data.error) {
+                        section.innerHTML = `<p>Error: ${response.data.error}</p>`;
+                    } else if (Array.isArray(data)) {
+                        data.forEach(community => {
+                            // Create grid card
+                            const card = document.createElement('div');
+                            card.classList.add('card');
+                            const cardImage = document.createElement('div');
+                            cardImage.classList.add('card-image');
+                            const img = document.createElement('img');
+                            img.src = community.image_url;
+                            img.alt = community.post_name;
+                            cardImage.appendChild(img);
+                            const cardDescription = document.createElement('div');
+                            cardDescription.classList.add('card-description');
+                            const h2 = document.createElement('h2');
+                            h2.textContent = community.post_title;
+                            const p = document.createElement('p');
+                            p.textContent = community.post_excerpt;
+                            cardDescription.appendChild(h2);
+                            cardDescription.appendChild(p);
+                            const readMore = document.createElement('a');
+                            readMore.href = community.post_url;
+                            readMore.classList.add('btn-readmore');
+                            readMore.textContent = 'Read More';
+                            card.appendChild(cardImage);
+                            card.appendChild(cardDescription);
+                            card.appendChild(readMore);
+                            section.appendChild(card);
+
+                            // Create carousel item
+                            const carouselItem = document.createElement('div');
+                            carouselItem.classList.add('carousel-item');
+                            const carouselImg = document.createElement('img');
+                            carouselImg.src = community.image_url;
+                            carouselImg.alt = community.post_name;
+                            carouselItem.appendChild(carouselImg);
+                            carousel.appendChild(carouselItem);
+                        });
+
+                        // Initialize Slick Carousel
+                        $(document).ready(function(){
+                            $('#community-carousel').slick({
+                                slidesToShow: 3,
+                                slidesToScroll: 1,
+                                infinite: true,
+                                dots: true,
+                                arrows: true,
+                                responsive: [
+                                    {
+                                        breakpoint: 1024,
+                                        settings: {
+                                            slidesToShow: 2,
+                                            slidesToScroll: 1,
+                                            infinite: true,
+                                            dots: true
+                                        }
+                                    },
+                                    {
+                                        breakpoint: 600,
+                                        settings: {
+                                            slidesToShow: 1,
+                                            slidesToScroll: 1
+                                        }
+                                    }
+                                ]
+                            });
+                        });
+                    } else {
+                        section.innerHTML = `<p>Unexpected response format.</p>`;
+                    }
+                })
+                .catch(error => {
+                    const section = document.getElementById('community-section');
+                    section.innerHTML = `<p>Error: ${error.message}</p>`;
+                });
+        });
+    </script>
+</body>
+</html>

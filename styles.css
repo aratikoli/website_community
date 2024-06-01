@@ -1,0 +1,192 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+}
+h1 {
+    padding: 8px;
+    margin: 0;
+    font-size: 64px;
+    font-family: sans-serif;
+}
+h2.common-heading {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 36px;
+    font-family: 'Times New Roman', Times, serif;
+    border-bottom: 2px solid #202125;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+p {
+    line-height: 1.5;
+}
+main {
+    margin: 0 auto;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+a.hover {
+    text-decoration: underline;
+}
+/* Inputs */
+input,
+textarea {
+    height: 32px;
+    padding: 0 16px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+    border: none;
+    box-shadow: inset 8px 3px 18px -4px rgba(0, 0, 0, 0.4);
+}
+nav {
+    height: 72px;
+    background: #202125;
+    width: 100%;
+    margin: 0;
+    position: fixed;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 16px 0 0;
+    box-sizing: border-box;
+    z-index: 100;
+}
+nav a {
+    padding: 0 32px;
+    color: #eee;
+    transition: 0.4s;
+}
+nav a:hover {
+    text-decoration: none;
+    color: red;
+}
+nav ul {
+    display: flex;
+    list-style: none;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+    margin: 0;
+}
+.active {
+    color: #f783ae;
+}
+/* Sections */
+section {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.section-heading {
+    font-size: 32px;
+    font-family: 'Times New Roman', Times, serif;
+    border-left: 3px solid black;
+    border-right: 3px solid black;
+    transition: all 0.4s;
+    display: inline-block;
+    padding: 4px 32px;
+}
+.section-heading:hover {
+    padding: 4px 48px;
+    background: red;
+}
+/* Card */
+.card-image {
+    transition: 0.4s;
+}
+.card-image:hover {
+    box-shadow: 0 10px 6px -6px #777;
+}
+.card .card-description {
+    padding: 0 8px;
+}
+.btn-readmore {
+    padding: 8px 24px;
+    border: 3px solid black;
+    transition: 0.4s;
+    display: inline-block;
+    margin-bottom: 24px;
+    margin-left: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: white;
+}
+.btn-readmore:hover {
+    background: red;
+    text-decoration: none;
+    padding: 8px 64px 8px 24px;
+    color: white;
+}
+/* Media queries */
+@media (max-width: 719px) {
+    main {
+        width: 95%;
+    }
+    section {
+        flex-direction: column;
+    }
+    .card, .card .card-image {
+        width: 100%;
+    }
+}
+@media (max-width: 900px) {
+    nav ul {
+        display: none;
+    }
+}
+@media (min-width: 720px) {
+    main {
+        width: 95%;
+    }
+    .card {
+        width: 45%;
+    }
+    .card .card-image img {
+        width: 100%;
+    }
+}
+@media (min-width: 1200px) {
+    main {
+        width: 85%;
+    }
+}
+/* Carousel */
+
+.carousel {
+    margin-top: 20px;
+}
+.carousel-item {
+    padding: 0 10px; /* Adjust the value to set the gap */
+}
+.carousel img {
+    width: 100%;
+    height: auto;
+}
+.slick-prev:before, .slick-next:before {
+    color: black;
+}
+/* Media queries */
+@media (max-width: 1024px) {
+    .carousel-item {
+        padding: 0 8px; /* Adjust the value to set the gap */
+    }
+}
+@media (max-width: 600px) {
+    .carousel-item {
+        padding: 0 5px; /* Adjust the value to set the gap */
+    }
+}
+@media (max-width: 719px) {
+    main {
+        width: 95%;
+    }
+    section {
+        flex-direction: column;
+    }
+    .card, .card .card-image {
+        width: 100%;
+    }
+}
